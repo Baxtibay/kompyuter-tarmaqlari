@@ -81,12 +81,27 @@ img {
 
 
 /* TIME */
-.hour {
+.top-bar-container {
   position: fixed;
   top: 0;
-  width: 80%;
-  height: 6px;
+  left: 0;
+  width: 100%;
+  height: 10px;
+  background-color: var(--standard-color);
+  overflow: hidden;
+}
+.top-bar {
+  height: 100%;
   background-color: orange;
+  transition: width 1s linear;
+}
+.countdown {
+  font-size: 16px;
+  margin: 0;
+  color: #fff;
+  border: none;
+  outline: none;
+  background-color: transparent;
 }
 
 
@@ -100,6 +115,7 @@ img {
   color: var(--white-color);
   background-color: var(--standard-color);
 }
+
 .site-header-container {
   display: flex;
 }
@@ -160,12 +176,22 @@ img {
   background-color: var(--white-color);
 }
 
-.answer {
+.start-timer {
   display: block;
-  padding-top: 10px;
-  padding-bottom: 20px;
+  margin-top: 10px;
+  margin-bottom: 20px;
   font-size: 18px;
   color: #666;
+  background-color: transparent;
+  border-color: transparent;
+}
+
+.start-timer:hover::before {
+  content: 'Start timer';
+  position: absolute;
+  left: 10%;
+  top: 4%;
+  font-size: 10px;
 }
 
 .answer-input {
@@ -183,6 +209,15 @@ img {
   color: var(--white-color);
   background-color:  var(--standard-color);
   cursor: pointer;
+}
+
+.button-submit:hover::after {
+  content: 'generate 50 answer';
+  position: absolute;
+  left: 30%;
+  bottom: 20px;
+  font-size: 10px;
+  color: #666;
 }
 
 @media screen and (max-width: 800px) {

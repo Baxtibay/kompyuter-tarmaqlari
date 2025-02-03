@@ -1511,14 +1511,11 @@ function createButton() {
 
 // Content header maker
 function headerContent() {
-  const span = document.createElement('span')
-  span.classList.add('answer')
+  const button = document.createElement('button')
+  button.classList.add('start-timer')
 
-  span.innerHTML = `
-    <a href="file/novaya.txt" class="answer__link" target="_blank">Javoblar
-    </a>
-  `
-  elAnswerContent.appendChild(span)
+  button.innerHTML = `Javoblar`
+  elAnswerContent.appendChild(button)
 }
 
 // CREATE SEND BUTTON
@@ -1530,4 +1527,38 @@ function createSendButton(div, clasName, text, append) {
   append.appendChild(div)
 }
 
+
+// Timer start function
+const elStartTimer = document.querySelector('.start-timer')
+let timer;
+
+function startCountdown() {
+  clearInterval(timer);
+  const countdownElement = document.querySelector('.countdown');
+  const topBar = document.querySelector('.top-bar');
+  const initialWidth = 100;
+
+  let timeParts = countdownElement.value.split(':').map(num => parseInt(num, 10));
+  let timeLeft = (timeParts[0] * 3600) + (timeParts[1] * 60) + timeParts[2];
+
+  timer = setInterval(() => {
+    let hours = Math.floor(timeLeft / 3600);
+    let minutes = Math.floor((timeLeft % 3600) / 60);
+    let seconds = timeLeft % 60;
+    countdownElement.value = `${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+
+    let widthPercentage = (timeLeft / ((timeParts[0] * 3600) + (timeParts[1] * 60) + timeParts[2])) * initialWidth;
+    topBar.style.width = `${widthPercentage}%`;
+
+    if (timeLeft <= 0) {
+        clearInterval(timer);
+    }
+    timeLeft--;
+  }, 1000);
+}
+
+elStartTimer.addEventListener('click', () => {
+  startCountdown();
+  // console.log('click');
+});
 // ------------------========= FUNCTIONS END =======-------------
